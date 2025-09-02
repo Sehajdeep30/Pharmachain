@@ -1,0 +1,212 @@
+/* =========================
+   🎨 CSS Variables (Theme)
+   ========================= */
+:root {
+  --primary-color: #007BFF;
+  --primary-hover-color: #0056b3;
+  --background-color: #f8f9fa;
+  --card-background-color: #ffffff;
+  --text-color: #212529;
+  --muted-text-color: #6c757d;
+  --border-color: #dee2e6;
+  --success-color: #28a745;
+  --card-shadow: 0 4px 6px rgba(0,0,0,0.05),
+                 0 10px 20px rgba(0,0,0,0.05);
+  --input-focus-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+/* =========================
+   🔹 Base Styles
+   ========================= */
+body {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* =========================
+   📦 Layout Containers
+   ========================= */
+.signup-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 24px;
+      width: 1464px;
+}
+
+.signup-card {
+  background: var(--card-background-color);
+  padding: 32px 40px;
+  border-radius: 16px;
+  box-shadow: var(--card-shadow);
+  width: 100%;
+  max-width: 480px;
+  text-align: center;
+}
+
+/* =========================
+   🏷️ Card Header
+   ========================= */
+.card-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.logo {
+  color: var(--primary-color);
+  margin-bottom: 16px;
+}
+
+.card-header h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+/* =========================
+   📝 Forms & Inputs
+   ========================= */
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  color: black;
+}
+
+.input-group {
+  position: relative;
+}
+
+.input-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted-text-color);
+  pointer-events: none; /* Allows clicking through */
+}
+
+.signup-select,
+.signup-input {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 12px 16px 12px 15px; /* space for icon */
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 16px;
+  background-color: #fdfdff;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  color: black;
+}
+
+.signup-select {
+  padding-left: 16px; /* no icon inside select */
+  color: black;
+}
+
+.signup-select:focus,
+.signup-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: var(--input-focus-shadow);
+}
+
+/* =========================
+   🔘 Buttons
+   ========================= */
+.btn-primary {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 14px;
+  margin-top: 8px;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--primary-hover-color);
+  transform: translateY(-1px);
+}
+
+.btn-primary:disabled {
+  background-color: #a0c7ff;
+  cursor: wait;
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* =========================
+   🎬 Animations
+   ========================= */
+.dynamic-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* =========================
+   🔗 Links & Feedback
+   ========================= */
+.login-link {
+  margin-top: 24px;
+  font-size: 14px;
+  color: var(--muted-text-color);
+}
+
+.login-link a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
+}
+
+.feedback-msg {
+  margin-top: 16px;
+  color: var(--success-color);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* =========================
+   📱 Responsive
+   ========================= */
+@media (max-width: 520px) {
+  .signup-card {
+    padding: 24px;
+  }
+
+  .card-header h2 {
+    font-size: 20px;
+  }
+}

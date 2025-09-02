@@ -43,10 +43,8 @@ import Footer from "./components/Footer";
 import Home from "./pages/Home";
 
 // Auth Pages
-import DoctorLogin from "./pages/Doctor/DoctorLogin";
-import PharmacistLogin from "./pages/Pharmacist/PharmacistLogin";
-import DoctorSignup from "./pages/Doctor/DoctorSignup";
-import PharmacistSignup from "./pages/Pharmacist/PharmacistSignup";
+import Signup from "./pages/Auth/Signup";
+import Login from "./pages/Auth/Login";
 import DoctorForgotPassword from "./pages/Doctor/DoctorForgotPassword";
 import PharmacistForgotPassword from "./pages/Pharmacist/PharmacistForgotPassword";
 
@@ -77,15 +75,14 @@ function App() {
         <Routes>
           {/* Home */}
           <Route path="/" element={<Home />} />
-
-          {/* Doctor Auth */}
-          <Route path="/doctor-login" element={<DoctorLogin />} />
-          <Route path="/doctor-signup" element={<DoctorSignup />} />
+          
+          
+          {/* Auth */}
+           <Route path="/signup" element={<Signup />} />
+           <Route path="/login" element={<Login/>} />
           <Route path="/doctor-forgot-password" element={<DoctorForgotPassword />} />
 
           {/* Pharmacist Auth */}
-          <Route path="/pharmacist-login" element={<PharmacistLogin />} />
-          <Route path="/pharmacist-signup" element={<PharmacistSignup />} />
           <Route path="/pharmacist-forgot-password" element={<PharmacistForgotPassword />} />
         </Routes>
       </Layout>
