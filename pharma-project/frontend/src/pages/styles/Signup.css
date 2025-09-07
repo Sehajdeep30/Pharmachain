@@ -1,212 +1,179 @@
-/* =========================
-   🎨 CSS Variables (Theme)
-   ========================= */
 :root {
-  --primary-color: #007BFF;
-  --primary-hover-color: #0056b3;
-  --background-color: #f8f9fa;
-  --card-background-color: #ffffff;
-  --text-color: #212529;
-  --muted-text-color: #6c757d;
-  --border-color: #dee2e6;
-  --success-color: #28a745;
-  --card-shadow: 0 4px 6px rgba(0,0,0,0.05),
-                 0 10px 20px rgba(0,0,0,0.05);
-  --input-focus-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+  --primary-color: #2563eb;
+  --primary-dark-color: #1e40af;
+  --light-gray-bg: #f9fafb;
+  --text-dark: #111827;
+  --text-light: #4b5563;
+  --border-color: #d1d5db;
+  --progress-bar-bg: #e5e7eb;
+  --error-color: #dc2626; /* Red for errors */
 }
 
-/* =========================
-   🔹 Base Styles
-   ========================= */
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   margin: 0;
-  background-color: var(--background-color);
-  color: var(--text-color);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--light-gray-bg);
 }
 
-/* =========================
-   📦 Layout Containers
-   ========================= */
 .signup-container {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  padding: 24px;
-      width: 1464px;
+  padding: 40px 20px;
 }
 
 .signup-card {
-  background: var(--card-background-color);
-  padding: 32px 40px;
+  background: white;
+  padding: 40px;
   border-radius: 16px;
-  box-shadow: var(--card-shadow);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
   width: 100%;
-  max-width: 480px;
+  max-width: 600px;
   text-align: center;
 }
 
-/* =========================
-   🏷️ Card Header
-   ========================= */
-.card-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 24px;
-}
-
-.logo {
-  color: var(--primary-color);
+.signup-card h2 {
+  margin-top: 0;
   margin-bottom: 16px;
-}
-
-.card-header h2 {
-  margin: 0;
+  color: var(--text-dark);
   font-size: 24px;
-  font-weight: 600;
 }
 
-/* =========================
-   📝 Forms & Inputs
-   ========================= */
-.signup-form {
+/* Progress Bar */
+.progress-bar {
   display: flex;
-  flex-direction: column;
-  gap: 16px;
-  color: black;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+.progress-step {
+  flex: 1;
+  text-align: center;
+}
+.step-circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: var(--progress-bar-bg);
+  color: var(--text-light);
+  border: 2px solid var(--progress-bar-bg);
+  line-height: 26px;
+  font-weight: 600;
+  margin: 0 auto 8px;
+  transition: all 0.3s ease;
+}
+.progress-step.active .step-circle {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: white;
+}
+.progress-step.completed .step-circle {
+  background-color: #16a34a;
+  border-color: #16a34a;
+  color: white;
+}
+.step-label {
+  font-size: 12px;
+  color: var(--text-light);
+}
+.progress-step.active .step-label {
+  font-weight: 600;
+  color: var(--text-dark);
 }
 
-.input-group {
-  position: relative;
+/* Form Grid & Fields */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 20px;
+  text-align: left;
+}
+.grid-col-span-2 {
+  grid-column: span 2;
 }
 
-.input-icon {
-  position: absolute;
-  left: 16px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--muted-text-color);
-  pointer-events: none; /* Allows clicking through */
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-dark);
 }
 
-.signup-select,
-.signup-input {
+.form-input,
+.form-select {
   box-sizing: border-box;
   width: 100%;
-  padding: 12px 16px 12px 15px; /* space for icon */
+  padding: 10px 14px;
   border: 1px solid var(--border-color);
   border-radius: 8px;
   font-size: 16px;
-  background-color: #fdfdff;
   transition: border-color 0.2s, box-shadow 0.2s;
+  background: white;
   color: black;
 }
-
-.signup-select {
-  padding-left: 16px; /* no icon inside select */
-  color: black;
-}
-
-.signup-select:focus,
-.signup-input:focus {
+.form-input:focus,
+.form-select:focus {
   outline: none;
   border-color: var(--primary-color);
-  box-shadow: var(--input-focus-shadow);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
 }
 
-/* =========================
-   🔘 Buttons
-   ========================= */
-.btn-primary {
+/* Validation Styles */
+.form-input.error,
+.form-select.error {
+  border-color: var(--error-color);
+}
+.error-message {
+  color: var(--error-color);
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+/* Navigation Buttons */
+.button-group {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  padding: 14px;
-  margin-top: 8px;
-  background: var(--primary-color);
-  color: white;
+  justify-content: space-between;
+  margin-top: 32px;
+}
+.btn {
+  padding: 12px 24px;
   border: none;
   border-radius: 8px;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.2s, transform 0.1s;
+  transition: all 0.2s;
+}
+.btn-secondary {
+  background-color: var(--progress-bar-bg);
+  color: var(--text-dark);
+}
+.btn-secondary:hover {
+  background-color: #d1d5db;
+}
+.btn-primary {
+  background: var(--primary-color);
+  color: white;
+}
+.btn-primary:hover {
+  background: var(--primary-dark-color);
 }
 
-.btn-primary:hover:not(:disabled) {
-  background: var(--primary-hover-color);
-  transform: translateY(-1px);
-}
-
-.btn-primary:disabled {
-  background-color: #a0c7ff;
-  cursor: wait;
-}
-
-.spinner {
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
-}
-
-/* =========================
-   🎬 Animations
-   ========================= */
-.dynamic-fields {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  animation: fadeIn 0.5s ease-in-out;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-10px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-/* =========================
-   🔗 Links & Feedback
-   ========================= */
-.login-link {
-  margin-top: 24px;
-  font-size: 14px;
-  color: var(--muted-text-color);
-}
-
-.login-link a {
-  color: var(--primary-color);
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.login-link a:hover {
-  text-decoration: underline;
-}
-
+/* Final Step Message */
 .feedback-msg {
-  margin-top: 16px;
-  color: var(--success-color);
-  font-size: 14px;
+  margin-top: 20px;
+  color: #16a34a;
   font-weight: 500;
 }
 
-/* =========================
-   📱 Responsive
-   ========================= */
-@media (max-width: 520px) {
-  .signup-card {
-    padding: 24px;
-  }
-
-  .card-header h2 {
-    font-size: 20px;
-  }
+/* Show calendar icon in Chrome/Edge */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  display: block;
+  cursor: pointer;
+  margin-left: 5px;
+  filter: invert(40%) sepia(80%) saturate(200%) hue-rotate(200deg);
 }
+

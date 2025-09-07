@@ -1,53 +1,178 @@
-// import React from "react";
-// import "./Home.css";
-
-// const Home = () => {
-//   return (
-//     <div className="home-container">
-//       <div className="welcome-card">
-//         <h1>Welcome to Pharma Project</h1>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Home;
-
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Home.css";
+// import demoVideo from "../assets/demo.mp4";
+
+
+const images = [
+  "https://imgs.search.brave.com/_bUIEbDUBcph44YIpRi56GrjLBTvvrX-8yVlas9E_8Q/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzAwLzgxLzk5LzM0/LzM2MF9GXzgxOTkz/NDAyX3ZiWWFJN2c3/RFl3OVhBVUcxSlE3/UmtBcEdBc1ZTV0dF/LmpwZw",
+  "https://imgs.search.brave.com/OmQL4M4BpourmuLCO8H9Z6gyB40TYETRkETSVOX_SvE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTM4/OTExNjQ1OC9waG90/by9mYXJtYWNpYS1w/aGFybWFjeS5qcGc_/cz02MTJ4NjEyJnc9/MCZrPTIwJmM9QWxo/bm0xTmw3Xy1HN3FC/U1VtRVM4dk1vT1JN/Z0ItM2JDUFc0QkZ3/Y0lqQT0",
+  "https://imgs.search.brave.com/InoGFa_q0eKPWHNPUVbFsiSZq_oQJ48eLRvQqD39f20/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/ZnJlZS1waG90by9t/ZWRpY2FsLWxhYi13/b3JrZXItYW5hbHl6/aW5nLWJsb29kLXNl/cnVtLWNvbmR1Y3Rp/bmctdmlydXMtdGVz/dC1tb2Rlcm4tZXF1/aXBwZWQtbGFiLWxh/dGUtbmlnaHQtdGVh/bS1zcGVjaWFsaXN0/cy1leGFtaW5pbmct/dmFjY2luZS1ldm9s/dXRpb24tdXNpbmct/aGlnaC10ZWNoLXRy/ZWF0bWVudC1hZ2Fp/bnN0LWNvdmlkMTlf/NDgyMjU3LTEzNjIx/LmpwZz9zZW10PWFp/c19oeWJyaWQmdz03/NDAmcT04MA",
+  "https://imgs.search.brave.com/Zshgq9_rw4jJEtQ1Lgwdr1ZRk4sW8b_mRqw6naxj5T8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzA0LzA2LzU4LzI2/LzM2MF9GXzQwNjU4/MjY0Ml9CaExFN3BW/UmEyTmNTVUNNVkJj/MmRGSkl2bWtkYkVi/ZC5qcGc",
+];
 
 const Home = () => {
+  const [currentImage, setCurrentImage] = useState(images[0]);
+
+  useEffect(() => {
+    let imageIndex = 0;
+    const interval = setInterval(() => {
+      imageIndex = (imageIndex + 1) % images.length;
+      setCurrentImage(images[imageIndex]);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="home-container">
-      {/* Welcome Section */}
-      <div className="welcome-card">
+      {/* Welcome */}
+      <div className="welcome-card section">
         <h1>
           Welcome to <span className="highlight">Pharma Project</span>
         </h1>
         <p className="subtitle">
-          A platform that connects <b>Doctors</b> and <b>Pharmacists</b> for better patient care.
+          A seamless platform connecting <b>Doctors</b> and <b>Pharmacists</b>{" "}
+          for enhanced patient care and medication management.
         </p>
       </div>
 
-      {/* About Section */}
-      <div className="about-section">
-        <h2>About Pharma Project</h2>
+      {/* About */}
+      <div className="about-section section">
+        <h2 className="section-title">About Our Platform</h2>
         <p>
-          Pharma Project helps doctors manage prescriptions and pharmacists handle inventory easily. 
-          This system ensures safe, accurate, and efficient patient medication management.
+          Pharma Project streamlines the prescription and inventory workflow.
+          Our system empowers doctors to manage prescriptions with precision and
+          allows pharmacists to handle inventory with real-time accuracy,
+          ensuring safe, efficient, and reliable patient care.
         </p>
       </div>
 
-      {/* Features Section */}
-      <div className="features-section">
-        <h2>Features</h2>
-        <ul>
-          <li>📋 Easy Prescription Management</li>
-          <li>💊 Real-time Inventory Updates</li>
-          <li>📊 Reports & Analytics</li>
-          <li>👩‍⚕️ Doctor & Pharmacist Collaboration</li>
-        </ul>
+      {/* Features */}
+      <div className="features-section section">
+        <h2 className="section-title">Our Core Features</h2>
+        <div className="card-container">
+          <div className="feature-card">
+            <h3>📋 Digital Prescriptions</h3>
+            <p>
+              Create, send, and manage digital prescriptions securely and
+              efficiently.
+            </p>
+          </div>
+          <div className="feature-card">
+            <h3>💊 Real-Time Inventory</h3>
+            <p>
+              Get instant updates, manage stock levels, and reduce shortages.
+            </p>
+          </div>
+          <div className="feature-card">
+            <h3>📊 Insightful Analytics</h3>
+            <p>
+              Generate reports on trends and stock for better decision-making.
+            </p>
+          </div>
+          <div className="feature-card">
+            <h3>👩‍⚕️ Secure Collaboration</h3>
+            <p>
+              A dedicated channel for seamless communication between doctors and
+              pharmacists.
+            </p>
+          </div>
+        </div>
       </div>
+
+      {/* How it works */}
+      <div className="how-it-works-section section">
+        <h2 className="section-title">How It Works</h2>
+        <div className="how-it-works-container">
+          <div className="step-card">
+            <div className="step-number">1</div>
+            <h3>Register</h3>
+            <p>
+              Create a secure account in minutes as either a Doctor or a
+              Pharmacist.
+            </p>
+          </div>
+          <div className="step-card">
+            <div className="step-number">2</div>
+            <h3>Prescribe & Dispense</h3>
+            <p>
+              Doctors issue digital prescriptions; Pharmacists receive and
+              manage them instantly.
+            </p>
+          </div>
+          <div className="step-card">
+            <div className="step-number">3</div>
+            <h3>Collaborate</h3>
+            <p>
+              Communicate seamlessly through the platform to ensure optimal
+              patient care.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Testimonials */}
+      <div className="testimonials-section section">
+        <h2 className="section-title">Trusted by Professionals</h2>
+        <div className="card-container">
+          <div className="testimonial-card">
+            <p>
+              "This platform has revolutionized how I handle prescriptions. It's
+              fast, secure, and has significantly reduced paperwork."
+            </p>
+            <div className="testimonial-author">
+              <div>
+                <strong>Dr. Evelyn Reed</strong>
+                <span>Cardiologist</span>
+              </div>
+            </div>
+          </div>
+          <div className="testimonial-card">
+            <p>
+              "Managing inventory has never been easier. The real-time updates
+              are a game-changer for my pharmacy's efficiency."
+            </p>
+            <div className="testimonial-author">
+              <div>
+                <strong>Mark Chen</strong>
+                <span>Lead Pharmacist</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Random Image */}
+      <div className="media-section section">
+        <h2 className="section-title">Healthcare in Action</h2>
+        <img
+          src={currentImage}
+          alt="Healthcare professionals"
+          className="random-image"
+        />
+      </div>
+
+      {/* Video */}
+      <div className="media-section section">
+        <h2 className="section-title">Watch How It Works</h2>
+        <video autoPlay loop muted playsInline className="demo-video">
+          <source
+            src="https://www.w3schools.com/html/mov_bbb.mp4"
+            type="video/mp4"
+          />
+          Your browser does not support the video tag.
+        </video>
+
+    
+
+        {/* <video autoPlay loop muted playsInline className="demo-video">
+  <source src={demoVideo} type="video/mp4" />
+  Your browser does not support the video tag.
+</video> */}
+
+
+      </div>
+
+      
     </div>
   );
 };

@@ -1,0 +1,235 @@
+:root {
+  --primary-color: #2563eb;
+  --primary-dark-color: #1e40af;
+  --light-gray-bg: #f9fafb;
+  --text-dark: #111827;
+  --text-light: #4b5563;
+  --border-color: #e5e7eb;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  margin: 0;
+  background-color: #fff;
+  color: var(--text-dark);
+}
+
+/* Generic Section Styling */
+.section {
+  padding: 80px 20px;
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.section-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--primary-dark-color);
+  margin-bottom: 16px;
+}
+
+.section-subtitle {
+  font-size: 18px;
+  color: var(--text-light);
+  max-width: 700px;
+  margin: 0 auto 48px auto;
+  line-height: 1.6;
+}
+
+/* Hero Section */
+.features-hero {
+  background-color: var(--light-gray-bg);
+  padding: 100px 20px;
+}
+
+.features-hero h1 {
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin: 0;
+}
+
+.features-hero p {
+  font-size: 20px;
+  color: var(--primary-color);
+  margin-top: 8px;
+}
+
+/* Tabs Section */
+.tabs-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 48px;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.tab-button {
+  padding: 12px 24px;
+  font-size: 18px;
+  font-weight: 600;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--text-light);
+  position: relative;
+  transition: color 0.3s;
+}
+
+.tab-button.active {
+  color: var(--primary-color);
+}
+
+.tab-button.active::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: var(--primary-color);
+}
+
+/* Features Grid */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  text-align: left;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.feature-item-card {
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.feature-icon {
+  background-color: #e0e7ff;
+  color: var(--primary-dark-color);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.feature-item-card h3 {
+  font-size: 20px;
+  margin: 0;
+}
+
+.feature-item-card p {
+  color: var(--text-light);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Shared Features */
+.shared-features-section {
+  background-color: var(--light-gray-bg);
+}
+
+/* FAQ Section */
+.faq-container {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.faq-item {
+  background: #fff;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+
+.faq-question {
+    color: black;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  padding: 20px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+ 
+}
+button:focus, button:focus-visible {
+    outline: none;
+}
+
+.faq-answer {
+  padding: 0 20px 20px;
+  color: var(--text-light);
+  line-height: 1.6;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
+}
+
+.faq-answer.open {
+  max-height: 200px; /* Adjust as needed */
+}
+
+/* CTA Section */
+.cta-section {
+  background-color: var(--primary-dark-color);
+  color: #fff;
+}
+
+.cta-section .section-title,
+.cta-section .section-subtitle {
+  color: #fff;
+}
+
+.cta-button {
+  background-color: #fff;
+  color: var(--primary-dark-color);
+  padding: 14px 28px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16px;
+  transition: transform 0.2s, background-color 0.2s;
+  display: inline-block;
+}
+
+.cta-button:hover {
+  background-color: var(--border-color);
+  transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .features-hero h1 {
+    font-size: 36px;
+  }
+  .tab-button {
+    font-size: 16px;
+    padding: 12px 16px;
+  }
+}

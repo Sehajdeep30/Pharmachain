@@ -41,6 +41,8 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from "react-route
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
+import AboutPage from "./pages/About";
+import FeaturesPage from "./pages/FeaturesPage";
 
 // Auth Pages
 import Signup from "./pages/Auth/Signup";
@@ -76,7 +78,12 @@ function App() {
           {/* Home */}
           <Route path="/" element={<Home />} />
           
-          
+          {/* About */}
+        <Route path="/about" element={<AboutPage />} />
+     
+       {/*  feature    */}
+         <Route path="/features" element={<FeaturesPage />} />
+
           {/* Auth */}
            <Route path="/signup" element={<Signup />} />
            <Route path="/login" element={<Login/>} />

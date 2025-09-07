@@ -13,7 +13,7 @@ function DoctorForgotPassword() {
             Send Reset Link
           </button>
         </form>
-        <Link to="/doctor-login" className="forgot-back-link">Back to Login</Link>
+        <Link to="/login" className="forgot-back-link">Back to Login</Link>
       </div>
     </div>
   );
