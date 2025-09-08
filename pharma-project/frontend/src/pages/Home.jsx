@@ -161,9 +161,6 @@ const Home = () => {
           />
           Your browser does not support the video tag.
         </video>
-
-    
-
         {/* <video autoPlay loop muted playsInline className="demo-video">
   <source src={demoVideo} type="video/mp4" />
   Your browser does not support the video tag.

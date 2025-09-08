@@ -1,0 +1,178 @@
+/* .theme-switcher-fab {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  font-size: 20px;
+}
+
+.theme-panel {
+  position: fixed;
+  bottom: 100px;
+  right: 30px;
+  background-color: var(--card-background-color);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  z-index: 999;
+  width: 280px;
+  text-align: left;
+  border: 1px solid var(--border-color);
+}
+
+.theme-panel h4 {
+  margin-top: 0;
+  margin-bottom: 16px;
+  font-size: 16px;
+}
+
+.theme-option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.color-palette {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.color-swatch {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border 0.2s ease;
+}
+
+.color-swatch.active {
+  border-color: var(--primary-color);
+}
+
+.color-name-display {
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--text-secondary-color);
+}
+
+.custom-color-picker {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.custom-color-picker input[type="color"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 32px;
+  height: 32px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  border-radius: 50%;
+}
+
+.custom-color-picker input[type="color"]::-webkit-color-swatch {
+  border-radius: 50%;
+  border: 1px solid var(--border-color);
+} */
+
+.theme-switcher-fab {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.theme-panel {
+  position: fixed;
+  bottom: 100px;
+  right: 30px;
+  background-color: var(--card-background-color);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  z-index: 999;
+  width: 280px;
+  border: 1px solid var(--border-color);
+  color: var(--text-primary-color);
+}
+
+.theme-panel h4 {
+  margin-top: 0;
+  margin-bottom: 16px;
+  font-size: 16px;
+}
+
+.theme-option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.color-palette {
+  display: flex;
+  gap: 12px;
+  margin: 8px 0;
+}
+
+.color-swatch {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+.color-swatch.active {
+  border-color: var(--primary-color);
+}
+
+.color-name-display {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.custom-color-picker {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.custom-color-picker input[type="color"] {
+  width: 32px;
+  height: 32px;
+  border: none;
+  cursor: pointer;
+  border-radius: 50%;
+}

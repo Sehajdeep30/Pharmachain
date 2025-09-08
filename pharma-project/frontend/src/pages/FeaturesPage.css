@@ -1,21 +1,17 @@
-:root {
-  --primary-color: #2563eb;
-  --primary-dark-color: #1e40af;
-  --light-gray-bg: #f9fafb;
-  --text-dark: #111827;
-  --text-light: #4b5563;
-  --border-color: #e5e7eb;
-}
 
+
+/* Body */
 body {
   font-family: "Inter", sans-serif;
   margin: 0;
-  background-color: #fff;
-  color: var(--text-dark);
+  background-color: var(--background-color, #fff);
+  color: var(--text-primary-color, #111827);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Generic Section Styling */
 .section {
+  background-color: var(--background-color, #fff);
   padding: 80px 20px;
   max-width: 1100px;
   margin: 0 auto;
@@ -25,13 +21,13 @@ body {
 .section-title {
   font-size: 32px;
   font-weight: 700;
-  color: var(--primary-dark-color);
+  color: var(--primary-dark-color, #1e40af);
   margin-bottom: 16px;
 }
 
 .section-subtitle {
   font-size: 18px;
-  color: var(--text-light);
+  color: var(--text-secondary-color, #4b5563);
   max-width: 700px;
   margin: 0 auto 48px auto;
   line-height: 1.6;
@@ -39,20 +35,20 @@ body {
 
 /* Hero Section */
 .features-hero {
-  background-color: var(--light-gray-bg);
+  background-color: var(--card-background-color, #f9fafb);
   padding: 100px 20px;
 }
 
 .features-hero h1 {
   font-size: 48px;
   font-weight: 700;
-  color: var(--text-dark);
+  color: var(--text-primary-color, #111827);
   margin: 0;
 }
 
 .features-hero p {
   font-size: 20px;
-  color: var(--primary-color);
+  color: var(--primary-color, #2563eb);
   margin-top: 8px;
 }
 
@@ -62,7 +58,7 @@ body {
   justify-content: center;
   gap: 10px;
   margin-bottom: 48px;
-  border-bottom: 2px solid var(--border-color);
+  border-bottom: 2px solid var(--border-color, #e5e7eb);
 }
 
 .tab-button {
@@ -72,13 +68,13 @@ body {
   border: none;
   background: none;
   cursor: pointer;
-  color: var(--text-light);
+  color: var(--text-secondary-color, #4b5563);
   position: relative;
   transition: color 0.3s;
 }
 
 .tab-button.active {
-  color: var(--primary-color);
+  color: var(--primary-color, #2563eb);
 }
 
 .tab-button.active::after {
@@ -88,7 +84,7 @@ body {
   left: 0;
   right: 0;
   height: 2px;
-  background-color: var(--primary-color);
+  background-color: var(--primary-color, #2563eb);
 }
 
 /* Features Grid */
@@ -101,21 +97,15 @@ body {
 }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .feature-item-card {
-  background: #fff;
+  background: var(--card-background-color, #fff);
   padding: 30px;
   border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 15px var(--shadow-color, rgba(0,0,0,0.05));
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -123,7 +113,7 @@ body {
 
 .feature-icon {
   background-color: #e0e7ff;
-  color: var(--primary-dark-color);
+  color: var(--primary-dark-color, #1e40af);
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -138,14 +128,14 @@ body {
 }
 
 .feature-item-card p {
-  color: var(--text-light);
+  color: var(--text-secondary-color, #4b5563);
   line-height: 1.6;
   margin: 0;
 }
 
-/* Shared Features */
+/* Shared Features Section */
 .shared-features-section {
-  background-color: var(--light-gray-bg);
+  background-color: var(--card-background-color, #f9fafb);
 }
 
 /* FAQ Section */
@@ -156,15 +146,15 @@ body {
 }
 
 .faq-item {
-  background: #fff;
-  border: 1px solid var(--border-color);
+  background: var(--card-background-color, #fff);
+  border: 1px solid var(--border-color, #e5e7eb);
   border-radius: 8px;
   margin-bottom: 16px;
   overflow: hidden;
 }
 
 .faq-question {
-    color: black;
+  color: var(--text-primary-color, #111827);
   width: 100%;
   text-align: left;
   background: none;
@@ -176,15 +166,15 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
- 
 }
+
 button:focus, button:focus-visible {
-    outline: none;
+  outline: none;
 }
 
 .faq-answer {
   padding: 0 20px 20px;
-  color: var(--text-light);
+  color: var(--text-secondary-color, #4b5563);
   line-height: 1.6;
   max-height: 0;
   overflow: hidden;
@@ -192,12 +182,12 @@ button:focus, button:focus-visible {
 }
 
 .faq-answer.open {
-  max-height: 200px; /* Adjust as needed */
+  max-height: 200px;
 }
 
 /* CTA Section */
 .cta-section {
-  background-color: var(--primary-dark-color);
+  background-color: var(--primary-dark-color, #1e40af);
   color: #fff;
 }
 
@@ -208,7 +198,7 @@ button:focus, button:focus-visible {
 
 .cta-button {
   background-color: #fff;
-  color: var(--primary-dark-color);
+  color: var(--primary-dark-color, #1e40af);
   padding: 14px 28px;
   border-radius: 8px;
   text-decoration: none;
@@ -219,17 +209,68 @@ button:focus, button:focus-visible {
 }
 
 .cta-button:hover {
-  background-color: var(--border-color);
+  background-color: var(--border-color, #e5e7eb);
   transform: translateY(-2px);
+}
+
+/* Footer */
+.site-footer {
+  background-color: var(--card-background-color, #111827);
+  color: var(--text-secondary-color, #d1d5db);
+  padding: 60px 20px 20px;
+  text-align: left;
+  transition: background-color 0.3s ease;
+}
+
+.footer-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-about h3,
+.footer-links h3,
+.footer-contact h3 {
+  font-size: 18px;
+  color: var(--text-primary-color, #fff);
+  margin-bottom: 16px;
+}
+
+.footer-about p,
+.footer-links a,
+.footer-contact p {
+  color: var(--text-secondary-color, #9ca3af);
+  text-decoration: none;
+  line-height: 1.7;
+}
+
+.footer-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li {
+  margin-bottom: 10px;
+}
+
+.footer-links a:hover {
+  color: var(--primary-color, #fff);
+}
+
+.footer-bottom {
+  border-top: 1px solid var(--border-color, #374151);
+  margin-top: 40px;
+  padding-top: 20px;
+  text-align: center;
+  font-size: 14px;
+  color: var(--text-secondary-color, #9ca3af);
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-  .features-hero h1 {
-    font-size: 36px;
-  }
-  .tab-button {
-    font-size: 16px;
-    padding: 12px 16px;
-  }
+  .features-hero h1 { font-size: 36px; }
+  .tab-button { font-size: 16px; padding: 12px 16px; }
 }

@@ -18,7 +18,7 @@ function AboutPage() {
           <div>
             <h3>Our Story</h3>
             <p>
-              Founded in Ghaziabad, Uttar Pradesh, in early 2025, Pharma Project
+              In early 2025, Pharma Project
               was born from a simple observation: the critical communication gap
               between doctors and pharmacists was hindering patient care. Our
               founders, a blend of healthcare and technology experts, witnessed
@@ -30,7 +30,7 @@ function AboutPage() {
             </p>
           </div>
           <img
-            src="https://source.unsplash.com/600x400/?team,collaboration"
+            src="https://imgs.search.brave.com/pUT0i37A_vJGnMNPsYsBKenV-lFuiEUaOlEGTNHY95Y/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9hc3Nl/dHMuYXNhbmEuYml6/L3RyYW5zZm9ybS84/ZDQxMjc2YS1iMGQ0/LTQzMTAtYjNmMy1i/MmY4NGJiZDk3ZDgv/aW5saW5lLWNvbGxh/Ym9yYXRpb24tY29s/bGFib3JhdGlvbi1p/bi10aGUtd29ya3Bs/YWNlLTItMng_aW89/dHJhbnNmb3JtOmZp/bGwsd2lkdGg6MjU2/MCZmb3JtYXQ9d2Vi/cA"
             alt="Team collaborating"
           />
         </div>
@@ -40,7 +40,7 @@ function AboutPage() {
       <div className="section" style={{ paddingTop: 0 }}>
         <div className="story-mission-container">
           <img
-            src="https://source.unsplash.com/600x400/?medical,technology"
+            src="https://imgs.search.brave.com/Lb841hkeEIJ4Gnf9ps8gineCml-KIkclNOzYhautJzU/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTQ4/OTk1NjAxMy9waG90/by9tZWRpY2FsLXRl/Y2hub2xvZ3ktYWkt/dGVjaG5vbG9neS1p/cy11dGlsaXplZC1i/eS1kb2N0b3JzLWZv/ci1kaWFnbm9zaW5n/LWluY3JlYXNpbmct/dGhlLmpwZz9zPTYx/Mng2MTImdz0wJms9/MjAmYz1rQjlKd3oz/UzhYRmlRTy1kU2t3/R0IxSVVkYlJfb3VM/alJVS0tMUEZLajlZ/PQ"
             alt="Medical technology"
           />
           <div>
@@ -67,34 +67,34 @@ function AboutPage() {
         <div className="team-grid">
           <div className="team-member-card">
             <img
-              src="https://placehold.co/120x120/E0E7FF/1E40AF?text=AS"
+              src="https://placehold.co/120x120/E0E7FF/1E40AF?text=SS"
               alt="Aarav Sharma"
             />
-            <h4>Aarav Sharma</h4>
+            <h4>Sehajdeep Singh</h4>
             <span>Co-Founder & CEO</span>
           </div>
           <div className="team-member-card">
             <img
-              src="https://placehold.co/120x120/E0E7FF/1E40AF?text=PD"
+              src="https://placehold.co/120x120/E0E7FF/1E40AF?text=DP"
               alt="Dr. Priya Desai"
             />
-            <h4>Dr. Priya Desai</h4>
+            <h4>Dhruv Pandey</h4>
             <span>Co-Founder & Chief Medical Officer</span>
           </div>
           <div className="team-member-card">
             <img
-              src="https://placehold.co/120x120/E0E7FF/1E40AF?text=RK"
+              src="https://placehold.co/120x120/E0E7FF/1E40AF?text=AM"
               alt="Rohan Kapoor"
             />
-            <h4>Rohan Kapoor</h4>
+            <h4>Advikk Mahajan</h4>
             <span>Chief Technology Officer</span>
           </div>
           <div className="team-member-card">
             <img
-              src="https://placehold.co/120x120/E0E7FF/1E40AF?text=SN"
+              src="https://placehold.co/120x120/E0E7FF/1E40AF?text=AK"
               alt="Sneha Nair"
             />
-            <h4>Sneha Nair</h4>
+            <h4>Aditya Kumar</h4>
             <span>Head of Pharmacy Relations</span>
           </div>
         </div>
