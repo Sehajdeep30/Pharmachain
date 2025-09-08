@@ -51,6 +51,9 @@ body {
   color: var(--primary-color, #2563eb);
   margin-top: 8px;
 }
+.features-container{
+       background-color: var(--border-color);
+}
 
 /* Tabs Section */
 .tabs-container {
