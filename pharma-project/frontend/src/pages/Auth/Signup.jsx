@@ -8,13 +8,15 @@ const indianStates = [
 ];
 
 const initialDoctorState = {
-  role: "doctor", fullName: "", email: "", password: "", phone: "", dateOfBirth: "", gender: "",
+  role: "doctor", fullName: "", email: "", password: "", confirmPassword: "",
+  phone: "", dateOfBirth: "", gender: "",
   licenseNumber: "", speciality: "", yearsOfExperience: "", qualification: "",
   hospitalName: "", hospitalAddress: "", city: "", state: "", pincode: "", aadharNumber: "", panNumber: ""
 };
 
 const initialPharmacistState = {
-  role: "pharmacist", fullName: "", email: "", password: "", phone: "", dateOfBirth: "", gender: "",
+  role: "pharmacist", fullName: "", email: "", password: "", confirmPassword: "",
+  phone: "", dateOfBirth: "", gender: "",
   licenseNumber: "", qualification: "", yearsOfExperience: "",
   pharmacyName: "", addressLine1: "", addressLine2: "", city: "", state: "", pincode: "", gstNumber: "", aadharNumber: ""
 };
@@ -24,6 +26,8 @@ export default function Signup() {
   const [formData, setFormData] = useState(initialDoctorState);
   const [errors, setErrors] = useState({});
   const [message, setMessage] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -40,7 +44,7 @@ export default function Signup() {
   const validateStep = () => {
     const currentErrors = {};
     const fieldsByStep = {
-      1: ["fullName", "email", "password", "phone", "dateOfBirth", "gender"],
+      1: ["fullName", "email", "password", "confirmPassword", "phone", "dateOfBirth", "gender"],
       2: {
         doctor: ["licenseNumber", "speciality", "yearsOfExperience", "qualification"],
         pharmacist: ["licenseNumber", "qualification", "yearsOfExperience"],
@@ -63,6 +67,8 @@ export default function Signup() {
       currentErrors.email = "Enter a valid email address.";
     if (formData.password && formData.password.length < 8)
       currentErrors.password = "Password must be at least 8 characters.";
+    if (step === 1 && formData.password && formData.confirmPassword && formData.password !== formData.confirmPassword)
+      currentErrors.confirmPassword = "Passwords do not match.";
 
     setErrors(currentErrors);
     return Object.keys(currentErrors).length === 0;
@@ -78,20 +84,30 @@ export default function Signup() {
     }
   };
 
-  const renderField = (name, label, type = "text", options = {}) => (
-    <div className={`form-group ${options.span2 ? "grid-col-span-2" : ""}`}>
-      <label>{label}</label>
-      <input
-        className={`form-input ${errors[name] ? "error" : ""}`}
-        type={type}
-        name={name}
-        value={formData[name] || ""}
-        onChange={handleChange}
-        placeholder={options.placeholder || ""}
-      />
-      {errors[name] && <p className="error-message">{errors[name]}</p>}
-    </div>
-  );
+  const renderField = (name, label, type = "text", options = {}, isPassword = false, showState, setShowState) => {
+    const inputType = isPassword ? (showState ? "text" : "password") : type;
+    return (
+      <div className={`form-group ${options.span2 ? "grid-col-span-2" : ""}`}>
+        <label>{label}</label>
+        <div className="input-wrapper">
+          <input
+            className={`form-input ${errors[name] ? "error" : ""}`}
+            type={inputType}
+            name={name}
+            value={formData[name] || ""}
+            onChange={handleChange}
+            placeholder={options.placeholder || ""}
+          />
+          {isPassword && (
+            <span className="password-toggle-icon" onClick={() => setShowState((prev) => !prev)}>
+              {showState ? "🙈" : "👁️"}
+            </span>
+          )}
+        </div>
+        {errors[name] && <p className="error-message">{errors[name]}</p>}
+      </div>
+    );
+  };
 
   const renderSelect = (name, label, values, options = {}) => (
     <div className={`form-group ${options.span2 ? "grid-col-span-2" : ""}`}>
@@ -122,7 +138,8 @@ export default function Signup() {
       </div>
       {renderField("fullName", "Full Name", "text", { placeholder: "Dr. John Doe" })}
       {renderField("email", "Email Address", "email", { placeholder: "you@example.com" })}
-      {renderField("password", "Create Password", "password", { placeholder: "Minimum 8 characters" })}
+      {renderField("password", "Create Password", "password", { placeholder: "Minimum 8 characters" }, true, showPassword, setShowPassword)}
+      {renderField("confirmPassword", "Confirm Password", "password", { placeholder: "Re-enter your password" }, true, showConfirmPassword, setShowConfirmPassword)}
       {renderField("phone", "Phone Number", "tel", { placeholder: "+91 XXXXX XXXXX" })}
       {renderField("dateOfBirth", "Date of Birth", "date")}
       {renderSelect("gender", "Gender", ["Male", "Female", "Other"])}
