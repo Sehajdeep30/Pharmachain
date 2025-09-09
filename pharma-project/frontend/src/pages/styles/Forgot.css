@@ -1,76 +1,192 @@
+:root {
+    --primary-color: #2563eb;
+    --primary-dark-color: #1e40af;
+    --text-dark: #111827;
+    --text-light: #374151;
+    --border-color: #d1d5db;
+    --light-bg: #f9fafb;
+    --card-bg: #ffffff;
+    --success-bg: #f0fdf4;
+    --success-text: #16a34a;
+    --success-border: #bbf7d0;
+    --error-bg: #fef2f2;
+    --error-text: #dc2626;
+    --error-border: #fecaca;
+}
+
+.theme-dark {
+    --primary-color: #3b82f6;
+    --primary-dark-color: #1d4ed8;
+    --text-dark: #f9fafb;
+    --text-light: #9ca3af;
+    --border-color: #374151;
+    --light-bg: #111827;
+    --card-bg: #1f2937;
+    --success-bg: #16221c;
+    --success-border: #224b30;
+    --error-bg: #2b1717;
+    --error-border: #5f2121;
+}
+
+/* ---------- Container ---------- */
 .forgot-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background: #f9fafb;
-  width: 1535px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    background: var(--light-bg);
 }
 
+/* ---------- Card ---------- */
 .forgot-card {
-  background: white;
-  padding: 35px 40px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  width: 415px;
-  text-align: center;
-  margin-top: -110px;
+    background: var(--card-bg);
+    padding: 35px 40px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+    transition: background 0.3s, color 0.3s;
+    border-top: 4px solid var(--primary-color);
 }
 
+/* ---------- Header & Icon ---------- */
+.forgot-header-icon {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: var(--light-bg);
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* ---------- Headings ---------- */
 .forgot-card h2 {
-  margin-bottom: 10px;
-  font-size: 32px;
-  font-weight: 600;
-  color: #111827;
+    margin-bottom: 12px;
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--text-dark);
 }
 
 .forgot-card p {
-  font-size: 18px;
-  color: #374151;
-  margin-bottom: 20px;
+    font-size: 15px;
+    color: var(--text-light);
+    margin-bottom: 24px;
+    line-height: 1.6;
+}
+
+/* ---------- Input Group ---------- */
+.input-group {
+    position: relative;
+    margin-bottom: 16px;
+}
+
+.input-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-light);
+    pointer-events: none;
 }
 
 .forgot-card input {
-  width: 78%;
-  padding: 12px;
-  border: 1px solid #d1d5db;
-  border-radius: 6px;
-  margin-bottom: 15px;
-  font-size: 15px;
-  outline: none;
-  background: white;
-  color: black;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 14px 12px 48px; /* Padding for icon */
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 15px;
+    outline: none;
+    background: var(--card-bg);
+    color: var(--text-dark);
+    transition: border-color 0.2s, box-shadow 0.2s, background-color 0.3s, color 0.3s;
 }
 
 .forgot-card input:focus {
-  border-color: #2563eb;
-  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px var(--primary-color-focus, rgba(37, 99, 235, 0.25));
 }
 
+/* ---------- Button ---------- */
 .forgot-btn-primary {
-  width: 84%;
-  padding: 12px;
-  border: none;
-  border-radius: 6px;
-  background: #2563eb;
-  color: white;
-  font-size: 15px;
-  font-weight: 500;
-  cursor: pointer;
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: var(--primary-color);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.25s, transform 0.2s;
+    margin-top: 30px;
 }
 
-.forgot-btn-primary:hover {
-  background: #1e40af;
+.forgot-btn-primary:hover:not(:disabled) {
+    background: var(--primary-dark-color);
+    transform: translateY(-2px);
 }
 
+.forgot-btn-primary:disabled {
+    background-color: #93c5fd;
+    cursor: not-allowed;
+}
+
+/* ---------- Back Link ---------- */
 .forgot-back-link {
-  display: block;
-  margin-top: 15px;
-  font-size: 14px;
-  color: #2563eb;
-  text-decoration: none;
+    display: inline-block;
+    margin-top: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.2s;
 }
 
 .forgot-back-link:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
+
+/* ---------- Feedback Message ---------- */
+.feedback-msg {
+    margin-top: 16px;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 12px;
+    border-radius: 8px;
+    text-align: left;
+}
+
+.feedback-msg.success {
+    background: var(--success-bg);
+    color: var(--success-text);
+    border: 1px solid var(--success-border);
+}
+
+.feedback-msg.error {
+    background: var(--error-bg);
+    color: var(--error-text);
+    border: 1px solid var(--error-border);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 480px) {
+    .forgot-card {
+        padding: 30px 25px;
+    }
+
+    .forgot-card h2 {
+        font-size: 22px;
+    }
+
+    .forgot-card p {
+        font-size: 14px;
+    }
+}
+
