@@ -1,165 +1,232 @@
 :root {
-  --primary-color: #2563eb;
-  --primary-dark-color: #1d4ed8;
-  --bg-color: #f9fafb;
+  /* Base Colors */
   --text-dark: #111827;
-  --text-light: #4b5563;
+  --text-light: #6b7280;
   --border-color: #d1d5db;
+  --light-gray-bg: #f3f4f6;
   --card-bg: #ffffff;
-  --success-color: #16a34a;
+
+  /* Defaults (fallback if no role is set) */
+  --role-primary-color: #2563eb;
+  --role-primary-dark-color: #1e40af;
+  --role-focus-ring: rgba(37, 99, 235, 0.2);
+  --role-success-color: #16a34a;
+  --role-link-color: #2563eb;
+  --role-link-hover: #1e40af;
+  --role-image-url: url("https://imgs.search.brave.com/Zshgq9_rw4jJEtQ1Lgwdr1ZRk4sW8b_mRqw6naxj5T8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzA0LzA2LzU4LzI2/LzM2MF9GXzQwNjU4/MjY0Ml9CaExFN3BW/UmEyTmNTVUNNVkJj/MmRGSkl2bWtkYkVi/ZC5qcGc");
 }
 
-/* 🌙 Dark Mode Overrides */
-.theme-dark {
-  --bg-color: #111827;
-  --text-dark: #f9fafb;
-  --text-light: #9ca3af;
-  --border-color: #374151;
-  --card-bg: #1f2937;
+/* Doctor Theme */
+.role-doctor {
+  --role-primary-color: #2563eb;
+  --role-primary-dark-color: #1e40af;
+  --role-focus-ring: rgba(37, 99, 235, 0.2);
+  --role-success-color: #2563eb; /* doctor success is blue */
+  --role-link-color: #2563eb;
+  --role-link-hover: #1e40af;
+  --role-image-url: url("https://imgs.search.brave.com/Zshgq9_rw4jJEtQ1Lgwdr1ZRk4sW8b_mRqw6naxj5T8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzA0LzA2LzU4LzI2/LzM2MF9GXzQwNjU4/MjY0Ml9CaExFN3BW/UmEyTmNTVUNNVkJj/MmRGSkl2bWtkYkVi/ZC5qcGc");
 }
 
-/* Base */
-body {
-  font-family: "Inter", sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: var(--bg-color);
-  color: var(--text-dark);
-  transition: background 0.3s, color 0.3s;
+/* Pharmacist Theme */
+.role-pharmacist {
+  --role-primary-color: #059669;
+  --role-primary-dark-color: #047857;
+  --role-focus-ring: rgba(5, 150, 105, 0.2);
+  --role-success-color: #059669; /* pharmacist success is green */
+  --role-link-color: #059669;
+  --role-link-hover: #047857;
+  --role-image-url: url("https://imgs.search.brave.com/OmQL4M4BpourmuLCO8H9Z6gyB40TYETRkETSVOX_SvE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTM4/OTExNjQ1OC9waG90/by9mYXJtYWNpYS1w/aGFybWFjeS5qcGc_/cz02MTJ4NjEyJnc9/MCZrPTIwJmM9QWxo/bm0xTmw3Xy1HN3FC/U1VtRVM4dk1vT1JN/Z0ItM2JDUFc0QkZ3/Y0lqQT0");
 }
 
-/* Container */
+/* Page Container */
 .login-container {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
   padding: 20px;
-}
-
-/* Card */
-.login-card2 {
-  background: var(--card-bg);
-  padding: 40px;
-  border-radius: 12px;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
-              0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  width: 100%;
-  max-width: 400px;
-  text-align: center;
-  margin: 16px;
-  transition: background 0.3s, color 0.3s;
-}
-
-.login-card2 h2 {
-  margin-top: 0;
-  margin-bottom: 24px;
+  background: var(--light-gray-bg);
   color: var(--text-dark);
-  font-size: 24px;
+}
+
+/* Wrapper */
+.login-wrapper {
+  display: flex;
+  width: 100%;
+  max-width: 960px;
+  background: var(--card-bg);
+  border-radius: 20px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+}
+
+/* Sidebar */
+.login-sidebar {
+  width: 45%;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    var(--role-image-url);
+  background-size: cover;
+  background-position: center;
+  color: white;
+  padding: 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: background-image 0.5s ease-in-out;
+}
+.login-sidebar h2 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+.login-sidebar p {
+  font-size: 16px;
+  opacity: 0.9;
+  line-height: 1.6;
+}
+
+/* Form Panel */
+.login-panel {
+  width: 55%;
+  padding: 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.login-header h2 {
+  margin: 0 0 8px 0;
+  font-size: 28px;
   font-weight: 600;
+  color: var(--text-dark);
+}
+.login-header p {
+  margin: 0 0 32px 0;
+  color: var(--text-light);
+  font-size: 16px;
 }
 
 /* Form */
 .login-form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
+}
+.login-group {
+  position: relative;
+}
+.login-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-light);
+}
+.login-toggle {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-light);
+  cursor: pointer;
 }
 
+/* Inputs */
 .login-select,
 .login-input {
+  color: var(--text-dark);
   box-sizing: border-box;
   width: 100%;
-  padding: 12px 16px;
+  padding: 12px 16px 12px 48px;
   border: 1px solid var(--border-color);
   border-radius: 8px;
   font-size: 16px;
-  transition: border-color 0.2s, box-shadow 0.2s, background 0.3s;
-  background: var(--card-bg);
-  color: var(--text-dark);
+  background-color: var(--light-gray-bg);
+  transition: all 0.2s ease;
 }
-
+.login-select {
+  padding-left: 16px;
+}
+.login-input[type="password"],
+.login-input[type="text"][name="password"] {
+  padding-right: 48px;
+}
 .login-select:focus,
 .login-input:focus {
   outline: none;
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+  border-color: var(--role-primary-color);
+  background-color: var(--card-bg);
+  box-shadow: 0 0 0 3px var(--role-focus-ring);
 }
 
 /* Button */
-.btn-primary {
+.login-btn2 {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 8px;
-  width: 100%;
-  padding: 12px;
-  background: var(--primary-color);
+  background: var(--role-primary-color);
   color: white;
+  padding: 14px;
   border: none;
   border-radius: 8px;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: background-color 0.5s ease, transform 0.1s;
+}
+.login-btn2:hover:not(:disabled) {
+  background: var(--role-primary-dark-color);
+  transform: translateY(-2px);
+}
+.login-btn2:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
-.btn-primary:hover:not(:disabled) {
-  background: var(--primary-dark-color);
-}
-
-.btn-primary:disabled {
-  background-color: #93c5fd;
-  cursor: wait;
-}
-
-/* Spinner */
-.spinner {
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+/* Messages */
+.login-message {
+  color: var(--role-success-color); /* theme aware */
+  font-weight: 500;
+  margin-top: 1rem;
 }
 
 /* Links */
-.extra-links {
-  margin-top: 20px;
+.login-links {
+  margin-top: 24px;
   font-size: 14px;
+  text-align: center;
+}
+.login-links a {
+  color: var(--role-link-color);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.5s ease;
+}
+.login-links a:hover {
+  color: var(--role-link-hover);
+}
+.login-separator {
+  margin: 0 8px;
   color: var(--text-light);
 }
 
-.extra-links a {
-  color: var(--primary-color);
-  text-decoration: none;
-  font-weight: 500;
+/* Responsive */
+@media (max-width: 900px) {
+  .login-sidebar {
+    display: none;
+  }
+  .login-panel {
+    width: 100%;
+  }
 }
-
-.extra-links a:hover {
-  text-decoration: underline;
-}
-
-/* Feedback */
-.feedback-msg {
-  margin-top: 16px;
-  color: var(--success-color);
-  font-size: 14px;
-  font-weight: 500;
-}
-
-/* 📱 Responsive */
 @media (max-width: 480px) {
-  .login-card2 {
-    padding: 24px;
+  .login-container {
+    padding: 0;
   }
-
-  .login-card2 h2 {
-    font-size: 20px;
+  .login-wrapper {
+    border-radius: 0;
   }
-
-  .btn-primary {
-    font-size: 14px;
-    padding: 10px;
+  .login-panel {
+    padding: 32px 24px;
   }
 }

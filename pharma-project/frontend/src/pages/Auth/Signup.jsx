@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "../styles/Signup.css";
 
 const indianStates = [
-  "Andhra Pradesh","Arunachal Pradesh","Assam","Bihar","Chhattisgarh","Goa","Gujarat","Haryana","Himachal Pradesh",
-  "Jharkhand","Karnataka","Kerala","Madhya Pradesh","Maharashtra","Manipur","Meghalaya","Mizoram","Nagaland","Odisha",
-  "Punjab","Rajasthan","Sikkim","Tamil Nadu","Telangana","Tripura","Uttar Pradesh","Uttarakhand","West Bengal"
+  "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh",
+  "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand",
+  "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur",
+  "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Punjab",
+  "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura",
+  "Uttar Pradesh", "Uttarakhand", "West Bengal"
 ];
 
 const initialDoctorState = {
@@ -47,20 +50,18 @@ export default function Signup() {
       1: ["fullName", "email", "password", "confirmPassword", "phone", "dateOfBirth", "gender"],
       2: {
         doctor: ["licenseNumber", "speciality", "yearsOfExperience", "qualification"],
-        pharmacist: ["licenseNumber", "qualification", "yearsOfExperience"],
+        pharmacist: ["licenseNumber", "qualification", "yearsOfExperience"]
       },
       3: {
-        doctor: ["hospitalName","hospitalAddress","city","state","pincode","aadharNumber","panNumber"],
-        pharmacist: ["pharmacyName","addressLine1","city","state","pincode","gstNumber","aadharNumber"],
-      },
+        doctor: ["hospitalName", "hospitalAddress", "city", "state", "pincode", "aadharNumber", "panNumber"],
+        pharmacist: ["pharmacyName", "addressLine1", "city", "state", "pincode", "gstNumber", "aadharNumber"]
+      }
     };
 
-    let fieldsToValidate = [];
-    if (step === 1) fieldsToValidate = fieldsByStep[1];
-    else fieldsToValidate = fieldsByStep[step][formData.role];
-
+    let fieldsToValidate = step === 1 ? fieldsByStep[1] : fieldsByStep[step][formData.role];
     fieldsToValidate.forEach((f) => {
-      if (!formData[f] || formData[f].trim() === "") currentErrors[f] = "This field is required.";
+      if (!formData[f] || String(formData[f]).trim() === "")
+        currentErrors[f] = "This field is required.";
     });
 
     if (formData.email && !/\S+@\S+\.\S+/.test(formData.email))
@@ -78,10 +79,9 @@ export default function Signup() {
   const handlePrev = () => { setErrors({}); setStep((p) => p - 1); };
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Re-validate the final step before submitting
     if (validateStep()) {
       console.log("Final Data:", formData);
-      setMessage(`Successfully submitted registration for ${formData.role}.`);
+      setMessage(`Registration for ${formData.role} submitted!`);
     }
   };
 
@@ -101,11 +101,27 @@ export default function Signup() {
           />
           {isPassword && (
             <span className="password-toggle-icon" onClick={() => setShowState((prev) => !prev)}>
-              {showState ? (
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
-              ) : (
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-              )}
+              {showPassword ? (
+                  <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                    fill="none" stroke="currentColor" strokeWidth="2"
+                    strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 
+                      0-11-8-11-8a18.45 18.45 0 0 1 
+                      5.06-5.94M9.9 4.24A9.12 9.12 0 
+                      0 1 12 4c7 0 11 8 11 8a18.5 
+                      18.5 0 0 1-2.16 3.19m-6.72-1.07a3 
+                      3 0 1 1-4.24-4.24"></path>
+                    <line x1="1" y1="1" x2="23" y2="23"></line>
+                  </svg>
+                ) : (
+                  <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                    fill="none" stroke="currentColor" strokeWidth="2"
+                    strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M1 12s4-8 11-8 11 8 11 
+                      8-4 8-11 8-11-8-11-8z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                  </svg>
+                )}
             </span>
           )}
         </div>
@@ -189,40 +205,61 @@ export default function Signup() {
     </div>
   );
 
+  const steps = [
+    { num: 1, title: "Account Details", desc: "Provide your personal info" },
+    { num: 2, title: "Professional Info", desc: "Your credentials" },
+    { num: 3, title: "Contact & Verification", desc: "Your location and ID" }
+  ];
+
   return (
     <div className="signup-container">
-      <div className="signup-card">
-        <h2>
-          {formData.role === "doctor"
-            ? "Create Your Doctor Account"
-            : "Create Your Pharmacist Account"}
-        </h2>
-
-        <div className="progress-bar">
-          <div className={`progress-step ${step >= 1 ? "active" : ""} ${step > 1 ? "completed" : ""}`}>
-            <div className="step-circle">1</div><div className="step-label">Account</div>
-          </div>
-          <div className={`progress-step ${step >= 2 ? "active" : ""} ${step > 2 ? "completed" : ""}`}>
-            <div className="step-circle">2</div><div className="step-label">Professional</div>
-          </div>
-          <div className={`progress-step ${step >= 3 ? "active" : ""}`}>
-            <div className="step-circle">3</div><div className="step-label">Contact</div>
-          </div>
+      <div className="signup-wrapper">
+        <div className="signup-sidebar">
+          <div className="sidebar-header">Pharma Project</div>
+          <ul className="progress-stepper">
+            {steps.map(({ num, title, desc }) => (
+              <li key={num} className={`progress-step ${step === num ? "active" : ""} ${step > num ? "completed" : ""}`}>
+                <div className="step-circle">{step > num ? "✔" : num}</div>
+                <div className="step-info">
+                  <h4>{title}</h4>
+                  <p>{desc}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
         </div>
 
-        <form onSubmit={handleSubmit}>
-          {step === 1 && renderStep1()}
-          {step === 2 && renderStep2()}
-          {step === 3 && renderStep3()}
+        <div className="signup-form-panel">
+          <h2>
+            {formData.role === "doctor"
+              ? "Create Your Doctor Account"
+              : "Create Your Pharmacist Account"}
+          </h2>
+          <form onSubmit={handleSubmit}>
+            {step === 1 && renderStep1()}
+            {step === 2 && renderStep2()}
+            {step === 3 && renderStep3()}
 
-          <div className="button-group">
-            {step > 1 && <button type="button" className="btn btn-secondary" onClick={handlePrev}>Previous</button>}
-            {step < 3 && <button type="button" className="btn btn-primary" onClick={handleNext}>Next Step</button>}
-            {step === 3 && <button type="submit" className="btn btn-primary">Create Account</button>}
-          </div>
-        </form>
-
-        {message && <p className="feedback-msg">{message}</p>}
+            <div className="button-group">
+              {step > 1 && (
+                <button type="button" className="btn btn-secondary" onClick={handlePrev}>
+                  Previous Step
+                </button>
+              )}
+              {step < 3 && (
+                <button type="button" className="btn btn-primary" onClick={handleNext}>
+                  Next Step
+                </button>
+              )}
+              {step === 3 && (
+                <button type="submit" className="btn btn-primary">
+                  Create Account
+                </button>
+              )}
+            </div>
+          </form>
+          {message && <p className="feedback-msg">{message}</p>}
+        </div>
       </div>
     </div>
   );
