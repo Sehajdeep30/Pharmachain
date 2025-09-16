@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "./Home.css";
-// import demoVideo from "../assets/demo.mp4";
-
 
 const images = [
   "https://imgs.search.brave.com/_bUIEbDUBcph44YIpRi56GrjLBTvvrX-8yVlas9E_8Q/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzAwLzgxLzk5LzM0/LzM2MF9GXzgxOTkz/NDAyX3ZiWWFJN2c3/RFl3OVhBVUcxSlE3/UmtBcEdBc1ZTV0dF/LmpwZw",
@@ -10,14 +8,38 @@ const images = [
   "https://imgs.search.brave.com/Zshgq9_rw4jJEtQ1Lgwdr1ZRk4sW8b_mRqw6naxj5T8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzA0LzA2LzU4LzI2/LzM2MF9GXzQwNjU4/MjY0Ml9CaExFN3BW/UmEyTmNTVUNNVkJj/MmRGSkl2bWtkYkVi/ZC5qcGc",
 ];
 
+const useScrollAnimation = () => {
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+          } else {
+            entry.target.classList.remove("is-visible"); // allows repeat animation
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    const elements = document.querySelectorAll(".animate-on-scroll");
+    elements.forEach((el) => observer.observe(el));
+
+    return () => elements.forEach((el) => observer.unobserve(el));
+  }, []);
+};
+
 const Home = () => {
   const [currentImage, setCurrentImage] = useState(images[0]);
 
+  useScrollAnimation();
+
   useEffect(() => {
-    let imageIndex = 0;
+    let i = 0;
     const interval = setInterval(() => {
-      imageIndex = (imageIndex + 1) % images.length;
-      setCurrentImage(images[imageIndex]);
+      i = (i + 1) % images.length;
+      setCurrentImage(images[i]);
     }, 4000);
     return () => clearInterval(interval);
   }, []);
@@ -25,134 +47,147 @@ const Home = () => {
   return (
     <div className="home-container">
       {/* Welcome */}
-      <div className="welcome-card section">
+      <div className="welcome-card section animate-on-scroll animate-zoom-in">
         <h1>
           Welcome to <span className="highlight">Pharma Project</span>
         </h1>
         <p className="subtitle">
           A seamless platform connecting <b>Doctors</b> and <b>Pharmacists</b>{" "}
-          for enhanced patient care and medication management.
+          for enhanced patient care.
         </p>
       </div>
 
       {/* About */}
-      <div className="about-section section">
+      <div className="about-section section animate-on-scroll animate-fade-up">
         <h2 className="section-title">About Our Platform</h2>
         <p>
-          Pharma Project streamlines the prescription and inventory workflow.
-          Our system empowers doctors to manage prescriptions with precision and
-          allows pharmacists to handle inventory with real-time accuracy,
-          ensuring safe, efficient, and reliable patient care.
+          Pharma Project streamlines prescriptions and inventory workflow. Our
+          system empowers doctors and pharmacists to ensure safe and efficient
+          patient care.
         </p>
       </div>
 
       {/* Features */}
       <div className="features-section section">
-        <h2 className="section-title">Our Core Features</h2>
+        <h2 className="section-title animate-on-scroll animate-fade-up">
+          Our Core Features
+        </h2>
         <div className="card-container">
-          <div className="feature-card">
-            <h3>📋 Digital Prescriptions</h3>
-            <p>
-              Create, send, and manage digital prescriptions securely and
-              efficiently.
-            </p>
-          </div>
-          <div className="feature-card">
-            <h3>💊 Real-Time Inventory</h3>
-            <p>
-              Get instant updates, manage stock levels, and reduce shortages.
-            </p>
-          </div>
-          <div className="feature-card">
-            <h3>📊 Insightful Analytics</h3>
-            <p>
-              Generate reports on trends and stock for better decision-making.
-            </p>
-          </div>
-          <div className="feature-card">
-            <h3>👩‍⚕️ Secure Collaboration</h3>
-            <p>
-              A dedicated channel for seamless communication between doctors and
-              pharmacists.
-            </p>
-          </div>
+          {[
+            {
+              icon: "📋",
+              title: "Digital Prescriptions",
+              desc: "Create, send, and manage digital prescriptions securely.",
+            },
+            {
+              icon: "💊",
+              title: "Real-Time Inventory",
+              desc: "Get instant updates and manage stock levels efficiently.",
+            },
+            {
+              icon: "📊",
+              title: "Insightful Analytics",
+              desc: "Generate reports for better decision-making.",
+            },
+            {
+              icon: "👩‍⚕️",
+              title: "Secure Collaboration",
+              desc: "Seamless communication between doctors and pharmacists.",
+            },
+          ].map((feature, i) => (
+            <div
+              key={i}
+              className="feature-card card-item animate-on-scroll animate-fade-up"
+            >
+              <h3>
+                {feature.icon} {feature.title}
+              </h3>
+              <p>{feature.desc}</p>
+            </div>
+          ))}
         </div>
       </div>
 
       {/* How it works */}
       <div className="how-it-works-section section">
-        <h2 className="section-title">How It Works</h2>
+        <h2 className="section-title animate-on-scroll animate-fade-up">
+          How It Works
+        </h2>
         <div className="how-it-works-container">
-          <div className="step-card">
-            <div className="step-number">1</div>
-            <h3>Register</h3>
-            <p>
-              Create a secure account in minutes as either a Doctor or a
-              Pharmacist.
-            </p>
-          </div>
-          <div className="step-card">
-            <div className="step-number">2</div>
-            <h3>Prescribe & Dispense</h3>
-            <p>
-              Doctors issue digital prescriptions; Pharmacists receive and
-              manage them instantly.
-            </p>
-          </div>
-          <div className="step-card">
-            <div className="step-number">3</div>
-            <h3>Collaborate</h3>
-            <p>
-              Communicate seamlessly through the platform to ensure optimal
-              patient care.
-            </p>
-          </div>
+          {[
+            {
+              step: 1,
+              title: "Register",
+              desc: "Create a secure account as a Doctor or Pharmacist.",
+            },
+            {
+              step: 2,
+              title: "Prescribe & Dispense",
+              desc: "Doctors issue digital prescriptions, pharmacists manage them instantly.",
+            },
+            {
+              step: 3,
+              title: "Collaborate",
+              desc: "Communicate seamlessly for optimal patient care.",
+            },
+          ].map((step, i) => (
+            <div
+              key={i}
+              className={`step-card animate-on-scroll ${
+                i % 2 === 0 ? "animate-slide-in-left" : "animate-slide-in-right"
+              }`}
+            >
+              <div className="step-number">{step.step}</div>
+              <h3>{step.title}</h3>
+              <p>{step.desc}</p>
+            </div>
+          ))}
         </div>
       </div>
 
       {/* Testimonials */}
       <div className="testimonials-section section">
-        <h2 className="section-title">Trusted by Professionals</h2>
+        <h2 className="section-title animate-on-scroll animate-fade-up">
+          Trusted by Professionals
+        </h2>
         <div className="card-container">
-          <div className="testimonial-card">
-            <p>
-              "This platform has revolutionized how I handle prescriptions. It's
-              fast, secure, and has significantly reduced paperwork."
-            </p>
-            <div className="testimonial-author">
-              <div>
-                <strong>Dr. Evelyn Reed</strong>
-                <span>Cardiologist</span>
+          {[
+            {
+              text:
+                "This platform has revolutionized how I handle prescriptions. It's fast and secure.",
+              author: "Dr. Evelyn Reed",
+              role: "Cardiologist",
+            },
+            {
+              text:
+                "Managing inventory has never been easier. Real-time updates improve efficiency.",
+              author: "Mark Chen",
+              role: "Lead Pharmacist",
+            },
+          ].map((t, i) => (
+            <div
+              key={i}
+              className={`testimonial-card card-item animate-on-scroll ${
+                i % 2 === 0 ? "animate-slide-in-left" : "animate-slide-in-right"
+              }`}
+            >
+              <p>"{t.text}"</p>
+              <div className="testimonial-author">
+                <strong>{t.author}</strong> <span>{t.role}</span>
               </div>
             </div>
-          </div>
-          <div className="testimonial-card">
-            <p>
-              "Managing inventory has never been easier. The real-time updates
-              are a game-changer for my pharmacy's efficiency."
-            </p>
-            <div className="testimonial-author">
-              <div>
-                <strong>Mark Chen</strong>
-                <span>Lead Pharmacist</span>
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
 
       {/* Random Image */}
-      <div className="media-section section">
+      <div className="media-section section animate-on-scroll animate-zoom-in">
         <h2 className="section-title">Healthcare in Action</h2>
-        <img
-          src={currentImage}
-          alt="Healthcare professionals"
-          className="random-image"
-        />
+        <img src={currentImage} alt="Healthcare" className="random-image" />
       </div>
 
       {/* Video */}
-      <div className="media-section section">
+      <div className="media-section section animate-on-scroll animate-fade-up">
         <h2 className="section-title">Watch How It Works</h2>
         <video autoPlay loop muted playsInline className="demo-video">
           <source
@@ -161,15 +196,7 @@ const Home = () => {
           />
           Your browser does not support the video tag.
         </video>
-        {/* <video autoPlay loop muted playsInline className="demo-video">
-  <source src={demoVideo} type="video/mp4" />
-  Your browser does not support the video tag.
-</video> */}
-
-
       </div>
-
-      
     </div>
   );
 };
