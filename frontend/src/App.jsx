@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
@@ -14,6 +15,18 @@ import PharmacistForgotPassword from "./pages/Pharmacist/PharmacistForgotPasswor
 // Theme
 import { ThemeProvider } from "./context/ThemeContext";
 import ThemeSwitcher from "./components/ThemeSwitcher";
+
+// ✅ ScrollToTop Component
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "instant" }); 
+    // use "smooth" instead of "instant" if you want smooth scroll
+  }, [pathname]);
+
+  return null;
+}
 
 function Layout({ children }) {
   const location = useLocation();
@@ -41,6 +54,7 @@ function App() {
   return (
     <ThemeProvider>
       <Router>
+        <ScrollToTop /> {/* 👈 Ensures page resets to top on route change */}
         <Layout>
           <Routes>
             {/* Home */}
