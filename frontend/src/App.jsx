@@ -54,7 +54,7 @@ function App() {
   return (
     <ThemeProvider>
       <Router>
-        <ScrollToTop /> {/* 👈 Ensures page resets to top on route change */}
+        <ScrollToTop />
         <Layout>
           <Routes>
             {/* Home */}
