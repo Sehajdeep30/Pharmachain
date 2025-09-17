@@ -117,3 +117,159 @@ hr { width: 100%; border: none; border-top: 1px solid var(--border-color); }
 .option-text h3 { margin: 0 0 4px 0; font-size: 20px; }
 .option-text p { margin: 0; font-size: 14px; opacity: 0.8; }
 .modal-close { position: absolute; top: 16px; right: 16px; background: none; border: none; font-size: 28px; cursor: pointer; color: var(--text-secondary-color); line-height: 1; }
+
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.modal-content {
+  background: var(--card-background-color);
+  padding: 2.5rem;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 650px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  transform: scale(0.95);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.modal-overlay.visible .modal-content {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.modal-header h2 {
+  margin-top: 0;
+  margin-bottom: 8px;
+  font-size: 24px;
+  color: var(--text-primary-color);
+}
+
+.modal-header p {
+  margin: 0;
+  color: var(--text-secondary-color);
+}
+
+/* Options container */
+.modal-options {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-top: 24px;
+}
+
+/* Option card */
+.option-card {
+  flex: 1;
+  min-width: 240px;
+  max-width: 280px;
+  text-decoration: none;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 220px;
+  background: var(--background-color);
+}
+
+.option-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.25);
+}
+
+.option-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0; left: 0;
+  z-index: 1;
+}
+
+.option-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 60%);
+  z-index: 2;
+}
+
+.option-text {
+  position: relative;
+  z-index: 3;
+  color: #fff;
+  padding: 16px;
+  text-align: left;
+}
+
+.option-text h3 {
+  margin: 0 0 6px 0;
+  font-size: 18px;
+}
+
+.option-text p {
+  margin: 0;
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+/* Footer */
+.modal-footer {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 24px;
+}
+
+.btn-back {
+  border: none;
+  background: var(--primary-color);
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  transition: background 0.3s ease;
+}
+
+.btn-back:hover {
+  background: var(--primary-dark-color);
+}
+
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: var(--text-secondary-color);
+  line-height: 1;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .modal-options {
+    flex-direction: column;
+  }
+  .option-card {
+    height: 180px;
+    min-width: 100%;
+  }
+}

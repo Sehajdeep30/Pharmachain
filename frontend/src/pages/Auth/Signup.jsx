@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import "../styles/Signup.css";
 
 const indianStates = [
@@ -25,12 +26,26 @@ const initialPharmacistState = {
 };
 
 export default function Signup() {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const params = new URLSearchParams(location.search);
+  const roleFromURL = params.get("role"); // doctor / pharmacist
+
   const [step, setStep] = useState(1);
-  const [formData, setFormData] = useState(initialDoctorState);
+  const [formData, setFormData] = useState(
+    roleFromURL === "pharmacist" ? initialPharmacistState : initialDoctorState
+  );
   const [errors, setErrors] = useState({});
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  // Reset form if URL role changes
+  useEffect(() => {
+    if (roleFromURL === "doctor") setFormData(initialDoctorState);
+    if (roleFromURL === "pharmacist") setFormData(initialPharmacistState);
+  }, [roleFromURL]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -77,11 +92,37 @@ export default function Signup() {
 
   const handleNext = () => { if (validateStep()) setStep((p) => p + 1); };
   const handlePrev = () => { setErrors({}); setStep((p) => p - 1); };
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (validateStep()) {
-      console.log("Final Data:", formData);
-      setMessage(`Registration for ${formData.role} submitted!`);
+    if (!validateStep()) return;
+
+    setLoading(true);
+    setMessage("");
+
+    try {
+      // Example backend endpoint
+      const res = await fetch("http://localhost:8000/api/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        setMessage(`Registration successful for ${formData.role}!`);
+        // Redirect after success
+        setTimeout(() => {
+          navigate(`/login?role=${formData.role}`);
+        }, 2000);
+      } else {
+        setMessage(data.error || "Signup failed. Try again.");
+      }
+    } catch (error) {
+      setMessage("Server error. Please try later.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -101,27 +142,7 @@ export default function Signup() {
           />
           {isPassword && (
             <span className="password-toggle-icon" onClick={() => setShowState((prev) => !prev)}>
-              {showPassword ? (
-                  <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
-                    fill="none" stroke="currentColor" strokeWidth="2"
-                    strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 
-                      0-11-8-11-8a18.45 18.45 0 0 1 
-                      5.06-5.94M9.9 4.24A9.12 9.12 0 
-                      0 1 12 4c7 0 11 8 11 8a18.5 
-                      18.5 0 0 1-2.16 3.19m-6.72-1.07a3 
-                      3 0 1 1-4.24-4.24"></path>
-                    <line x1="1" y1="1" x2="23" y2="23"></line>
-                  </svg>
-                ) : (
-                  <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
-                    fill="none" stroke="currentColor" strokeWidth="2"
-                    strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M1 12s4-8 11-8 11 8 11 
-                      8-4 8-11 8-11-8-11-8z"></path>
-                    <circle cx="12" cy="12" r="3"></circle>
-                  </svg>
-                )}
+              {showState ? "🙈" : "👁️"}
             </span>
           )}
         </div>
@@ -150,13 +171,15 @@ export default function Signup() {
 
   const renderStep1 = () => (
     <div className="form-grid">
-      <div className="form-group grid-col-span-2">
-        <label>Register As</label>
-        <select className="form-select" name="role" value={formData.role} onChange={handleRoleChange}>
-          <option value="doctor">Doctor</option>
-          <option value="pharmacist">Pharmacist</option>
-        </select>
-      </div>
+      {!roleFromURL && (
+        <div className="form-group grid-col-span-2">
+          <label>Register As</label>
+          <select className="form-select" name="role" value={formData.role} onChange={handleRoleChange}>
+            <option value="doctor">Doctor</option>
+            <option value="pharmacist">Pharmacist</option>
+          </select>
+        </div>
+      )}
       {renderField("fullName", "Full Name", "text", { placeholder: "Dr. John Doe" })}
       {renderField("email", "Email Address", "email", { placeholder: "you@example.com" })}
       {renderField("password", "Create Password", "password", { placeholder: "Minimum 8 characters" }, true, showPassword, setShowPassword)}
@@ -252,8 +275,8 @@ export default function Signup() {
                 </button>
               )}
               {step === 3 && (
-                <button type="submit" className="btn btn-primary">
-                  Create Account
+                <button type="submit" className="btn btn-primary" disabled={loading}>
+                  {loading ? "Creating Account..." : "Create Account"}
                 </button>
               )}
             </div>

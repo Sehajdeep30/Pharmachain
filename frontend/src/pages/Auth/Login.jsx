@@ -1,20 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import "../styles/Login.css";
 
 const initialFormState = { email: "", password: "" };
 
 export default function Login() {
-  const [role, setRole] = useState("doctor");
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const roleFromURL = params.get("role"); // doctor / pharmacist
+
+  const [role, setRole] = useState(roleFromURL || "doctor");
   const [formData, setFormData] = useState(initialFormState);
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleRoleChange = (e) => {
-    setRole(e.target.value);
+  // Reset form when role changes
+  useEffect(() => {
     setFormData(initialFormState);
     setMessage("");
-  };
+  }, [role]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -25,11 +30,11 @@ export default function Login() {
     e.preventDefault();
     setIsLoading(true);
     setMessage("");
+
+    // Fake API delay
     setTimeout(() => {
       setIsLoading(false);
-      setMessage(
-        `${role.charAt(0).toUpperCase() + role.slice(1)} login successful!`
-      );
+      setMessage(`${role} login successful!`);
     }, 1500);
   };
 
@@ -61,15 +66,19 @@ export default function Login() {
           </div>
 
           <form className="login-form" onSubmit={handleSubmit}>
-            <select
-              className="login-select"
-              value={role}
-              onChange={handleRoleChange}
-            >
-              <option value="doctor">Login as Doctor</option>
-              <option value="pharmacist">Login as Pharmacist</option>
-            </select>
+            {/* Show dropdown only if user didn’t come from modal */}
+            {!roleFromURL && (
+              <select
+                className="login-select"
+                value={role}
+                onChange={(e) => setRole(e.target.value)}
+              >
+                <option value="doctor">Login as Doctor</option>
+                <option value="pharmacist">Login as Pharmacist</option>
+              </select>
+            )}
 
+            {/* Email */}
             <div className="login-group">
               <span className="login-icon">📧</span>
               <input
@@ -83,6 +92,7 @@ export default function Login() {
               />
             </div>
 
+            {/* Password */}
             <div className="login-group">
               <span className="login-icon">🔒</span>
               <input
@@ -99,9 +109,17 @@ export default function Login() {
                 onClick={() => setShowPassword(!showPassword)}
               >
                 {showPassword ? (
-                  <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
-                    fill="none" stroke="currentColor" strokeWidth="2"
-                    strokeLinecap="round" strokeLinejoin="round">
+                  // Eye-off icon
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="25"
+                    height="25"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
                     <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 
                       0-11-8-11-8a18.45 18.45 0 0 1 
                       5.06-5.94M9.9 4.24A9.12 9.12 0 
@@ -111,9 +129,17 @@ export default function Login() {
                     <line x1="1" y1="1" x2="23" y2="23"></line>
                   </svg>
                 ) : (
-                  <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
-                    fill="none" stroke="currentColor" strokeWidth="2"
-                    strokeLinecap="round" strokeLinejoin="round">
+                  // Eye icon
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="25"
+                    height="25"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
                     <path d="M1 12s4-8 11-8 11 8 11 
                       8-4 8-11 8-11-8-11-8z"></path>
                     <circle cx="12" cy="12" r="3"></circle>
@@ -122,13 +148,16 @@ export default function Login() {
               </span>
             </div>
 
+            {/* Submit Button */}
             <button type="submit" className="login-btn2" disabled={isLoading}>
               {isLoading ? "Logging In..." : "Login"}
             </button>
           </form>
 
+          {/* Success/Error Messages */}
           {message && <p className="login-message">{message}</p>}
 
+          {/* Links */}
           <div className="login-links">
             <a href={`/${role}-forgot-password`}>Forgot Password?</a>
             <span className="login-separator">·</span>
