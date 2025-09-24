@@ -1,0 +1,11 @@
+fastapi
+sqlmodel
+uvicorn
+alembic
+pyJWT
+bcrypt
+passlib
+pydantic[email]
+psycopg2-binary #For PostgreSQL
+python-dotenv
+boto
